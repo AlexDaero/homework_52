@@ -1,32 +1,30 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import './TaskMenu.css'
 import Task from "../Task/Task";
 
-function TaskMenu(props) {
-    let [tasksState, setTasksState] = useState([
+function AddTaskForm(props) {
+    const [tasksState, setTasksState] = useState([
         { text: 'Помыть посуду' },
         { text: 'Убрать дом' },
         { text: 'Погладить кота' }
     ])
-    let tasks = []
     const [input, setInput] = useState(props?.value ?? '')
     const newTask = () => {
         if (String(input).trim() === '') return alert('Вы ничего не ввели')
-        let copyState = [...tasksState]
-        copyState = [
+        const copyState = [
             ...tasksState,
             { text: input }
         ]
         setTasksState(copyState)
     }
-    tasks = tasksState.map((item, ind) => {
-        console.log('1')
-        return <Task
-            key={ind}
-            id={Math.random()}
-            text={item.text}
-        />
-    })
+    const renameTask = (event, index) => {
+        const taskCopy = {...tasksState[index]}
+        const stateCopy = [...tasksState]
+        console.log(event.target.value)
+        taskCopy.text = document.getElementById(`input_${index}`).value
+        stateCopy[index] = taskCopy
+        setTasksState(stateCopy)
+    }
     return (
         <div className="TaskMenu_block">
             <div className="TaskMenu_block_menu">
@@ -34,10 +32,17 @@ function TaskMenu(props) {
                 <button className="TaskMenu_block_menu_btn" onClick={newTask}>Добавить</button>
             </div>
             <div className="TaskMenu_block_tasks">
-                {tasks}
+                {tasksState.map((item, ind) => {
+                    return <Task
+                        key={ind}
+                        text={item.text}
+                        inpId={ind}
+                        renameTask={(event) => renameTask(event, ind)}
+                    />
+                })}
             </div>
         </div>
     )
 }
 
-export default TaskMenu
+export default AddTaskForm
