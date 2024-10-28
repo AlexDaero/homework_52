@@ -1,0 +1,19 @@
+.task{
+    width: 400px;
+    min-height: 50px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: flex;
+}
+.task_text{
+    width: 300px;
+    text-align: left;
+    padding: 0 10px;
+}
+.task_btn{
+    width: 100px;
+    border: none;
+    border-left: 1px solid black;
+    border-radius: 0 10px 10px 0;
+    background-color: rgb(159, 0, 0);
+}
