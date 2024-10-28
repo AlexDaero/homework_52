@@ -17,12 +17,16 @@ function AddTaskForm(props) {
         ]
         setTasksState(copyState)
     }
-    const renameTask = (event, index) => {
-        const taskCopy = {...tasksState[index]}
+    const renameTask = (index) => {
+        const taskCopy = { ...tasksState[index] }
         const stateCopy = [...tasksState]
-        console.log(event.target.value)
         taskCopy.text = document.getElementById(`input_${index}`).value
         stateCopy[index] = taskCopy
+        setTasksState(stateCopy)
+    }
+    const removeTask = (index) => {
+        const stateCopy = [...tasksState]
+        stateCopy.splice(index, 1)
         setTasksState(stateCopy)
     }
     return (
@@ -36,8 +40,9 @@ function AddTaskForm(props) {
                     return <Task
                         key={ind}
                         text={item.text}
-                        inpId={ind}
-                        renameTask={(event) => renameTask(event, ind)}
+                        id={ind}
+                        renameTask={() => renameTask(ind)}
+                        removeTask={()=> removeTask(ind)}
                     />
                 })}
             </div>

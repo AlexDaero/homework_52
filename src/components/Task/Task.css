@@ -1,4 +1,5 @@
 .task{
+    position: relative;
     width: 400px;
     min-height: 50px;
     border: 1px solid black;
@@ -25,4 +26,10 @@
     border-radius: 0 10px 10px 0;
     background-color: rgb(159, 0, 0);
     font-size: 10px;
+}
+.task_rename_block{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 125%;
 }
